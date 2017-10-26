@@ -645,7 +645,7 @@ blockquote.blockquote-reverse:before {
 ------------- 2 - Icons  */
 .fontawesome-icon-list a,
 .bs-glyphicons-list li {
-  color:#5a5a5a;
+  color:#0066ff;
   display:block;
   padding:0.3em 0.6em;
 }

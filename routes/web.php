@@ -11,10 +11,36 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Auth::routes();
 
-Route::get('admin/home', 'HomeController@index')->name('home');
+
+ Route::group(['middleware' => 'auth'], function (){
+
+    Route::resource('admin/users', 'Admin\AdminUsersController');
+
+    Route::resource('admin/products', 'Admin\AdminProductsController');
+
+    Route::resource('admin/categories', 'Admin\AdminCategoriesController');
+
+    Route::resource('admin/settings', 'Admin\AdminSettingsController');
+
+    Route::get('/admin', ['as' => 'admin', function(){
+        return view('admin.index');
+    }]);
+
+     Route::get('logout', 'Auth\LoginController@logout');
+
+ });
+
+ Route::group(['middleware' => 'web'], function(){
+
+     Route::get('/', 'HomeController@index')->name('home');
+
+     Route::get('/{slug}', 'HomeController@getCategory')->name('category');
+
+     Route::get('/{slug}/{slug}', 'HomeController@getCategory')->name('subcategory');
+
+ });
+
+
+
